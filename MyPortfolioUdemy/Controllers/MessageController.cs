@@ -25,5 +25,17 @@ namespace MyPortfolioUdemy.Controllers
 			context.SaveChanges();
 			return RedirectToAction("Inbox");
 		}
+		public IActionResult DeleteMessage(int id)//gelen mesajları silme alanıdır
+		{
+			var value = context.Messages.Find(id);
+			context.Messages.Remove(value);
+			context.SaveChanges();
+			return RedirectToAction("Inbox");
+		}
+		public IActionResult MessageDetail(int id)
+		{
+			var value = context.Messages.Find(id);
+			return View(value);
+		}
 	}
 }
