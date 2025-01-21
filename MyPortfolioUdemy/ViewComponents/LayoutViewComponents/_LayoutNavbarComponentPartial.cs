@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyPortfolioUdemy.DAL.Context;
 
 namespace MyPortfolioUdemy.ViewComponents.LayoutViewComponents
 {
 	public class _LayoutNavbarComponentPartial:ViewComponent
 	{
-        public IViewComponentResult Invoke()
+		MyPortfolioContext context = new MyPortfolioContext();
+		public IViewComponentResult Invoke()
 		{
-			return View();
+			ViewBag.ToDoListCount = context.ToDoLists.Where(x => x.Status == false).Count();//okunmamaış yada tamamlanmamış verilerin sayısını verir
+			var values = context.ToDoLists.Where(x => x.Status == false).ToList();
+			return View(values);
 		}
     }
 }
